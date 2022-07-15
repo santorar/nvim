@@ -109,34 +109,34 @@ local m_mappings = {
 local mappings = {
   q = {
     name = "Quit",
-    q = {"Close the current buffer"},
-    w = {"Close and save the current buffer"},
+    q = {":bd!<CR>","Close the current buffer"},
+    w = {":bw!<CR>","Close and save the current buffer"},
     a = {":q!<CR>","Closes neovim"},
   },
   s = {
     name = 'Split',
-    v = { "Vertical split"},
-    h = { "Horizontal split"},
+    v = { ":vs<CR>","Vertical split"},
+    h = { ":split<CR>","Horizontal split"},
   },
   f = {
     name = "telescope",
     f = {":Telescope find_files<CR>", "find files"},
     g = {":Telescope live_grep<CR>", "find words"},
-    r = {":Telescope frecency<CR>", "find files by frecency "},
+    p = {":Telescope projects<CR>", "navigate on your projects"},
     b = {":Telescope buffers<CR>", "find buffers"},
     o = {":Telescope oldfiles<CR>", "display recent opened files"},
     h = {":Telescope help_tags<CR>", "display help guides"},
-    m = {":Telescope bookmarks<CR>", "display browser bookmarks"},
+    k = {":Telescope keymaps<CR>", "display the set of keymaps"},
   },
   b = {
     name = "Buffers",
-    t = {"Open a new buffer"},
-    h = {"Open a new buffer horizontally"},
-    v = {"Open a new buffer vertically"},
+    t = {":enew<CR>","Open a new buffer"},
+    h = {":new<CR>","Open a new buffer horizontally"},
+    v = {":vnew<CR>","Open a new buffer vertically"},
   },
   u = {
     name = "Update",
-    u = {"Packer Sync"},
+    u = {":PackkerSync<CR>","Packer Sync"},
   },
   e = {
     name = "Edit",
@@ -154,9 +154,8 @@ local mappings = {
     e = {":lua vim.lsp.diagnostic.show_line_diagnostics()<CR>","Show line diagnostics"},
     q = {":lua vim.lsp.diagnostic.set_loclist()<CR>","Show loclist"},
   },
-  h = {"Next buffer"},
-  l = {"Prev buffer"},
-  n = {"Open the Neotree"},
+  h = {":BufferLineCyclePrev<CR>","Next buffer"},
+  l = {":BufferLineCycleNext<CR>","Prev buffer"},
 }
 local vopts = {
   mode = "v",
