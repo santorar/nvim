@@ -8,11 +8,6 @@ if not snip_status_ok then
   return
 end
 
-local tabnine_status_ok, _ = pcall(require, "user.tabnine")
-if not tabnine_status_ok then
-  return
-end
-
 local compare = require "cmp.config.compare"
 
 require("luasnip/loaders/from_vscode").lazy_load()
@@ -31,8 +26,6 @@ local icons = require "user.icons"
 
 local kind_icons = icons.kind
 
-vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
-vim.api.nvim_set_hl(0, "CmpItemKindTabnine", { fg = "#CA42F0" })
 vim.api.nvim_set_hl(0, "CmpItemKindEmoji", { fg = "#FDE030" })
 vim.api.nvim_set_hl(0, "CmpItemKindCrate", { fg = "#F64D00" })
 
@@ -131,10 +124,8 @@ cmp.setup {
     { name = "crates", group_index = 1 },
     { name = "nvim_lsp", group_index = 2 },
     { name = "nvim_lua", group_index = 2 },
-    { name = "copilot", group_index = 2 },
     { name = "luasnip", group_index = 2 },
     { name = "buffer", group_index = 2 },
-    { name = "cmp_tabnine", group_index = 2 },
     { name = "path", group_index = 2 },
     { name = "emoji", group_index = 2 },
   },
@@ -160,6 +151,9 @@ cmp.setup {
   confirm_opts = {
     behavior = cmp.ConfirmBehavior.Replace,
     select = false,
+  },
+  completion  = {
+    completeopt = 'menu,menuone,noinsert',
   },
   window = {
     documentation = {
