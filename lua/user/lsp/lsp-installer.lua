@@ -7,6 +7,7 @@ local servers = {
   "cssls",
   "cssmodules_ls",
   "emmet_ls",
+  "eslint",
   "html",
   "jdtls",
   "jsonls",
@@ -57,6 +58,11 @@ for _, server in pairs(servers) do
   }
 
   server = vim.split(server, "@")[1]
+
+  if server == "tsserver" then
+    local tsserver_opts = require('user.lsp.settings.tsserver')
+    opts = vim.tbl_deep_extend("force",tsserver_opts,opts)
+  end
 
   if server == "jsonls" then
     local jsonls_opts = require "user.lsp.settings.jsonls"

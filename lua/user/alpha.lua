@@ -26,7 +26,7 @@ dashboard.section.header.val = {
   [[]],
 }
 dashboard.section.buttons.val = {
-  dashboard.button("f", icons.documents.Files .. "Find file", ":Telescope find_files <CR>"),
+  dashboard.button("f", icons.documents.Files .. " Find file", ":Telescope find_files <CR>"),
   dashboard.button("e", icons.ui.NewFile .. " New file", ":ene <BAR> startinsert <CR>"),
   dashboard.button(
     "p",
@@ -47,7 +47,7 @@ local function footer()
   -- local fortune = handle:read("*a")
   -- handle:close()
   -- return fortune
-  return "Enjoy your coding 😎"
+  return "Enjoy your coding :D "
 end
 
 local config = {
