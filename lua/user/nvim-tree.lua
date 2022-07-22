@@ -13,15 +13,11 @@ local icons = require "user.icons"
 local tree_cb = nvim_tree_config.nvim_tree_callback
 
 nvim_tree.setup {
-  hijack_directories = {
-    enable = false,
+  update_focused_file = {
+    enable = true,
+    update_cwd = true,
   },
-  -- update_to_buf_dir = {
-  --   enable = false,
-  -- },
-  -- disable_netrw = true,
-  -- hijack_netrw = true,
-  -- open_on_setup = false,
+
   ignore_ft_on_setup = {
     "startify",
     "dashboard",
@@ -103,19 +99,6 @@ nvim_tree.setup {
       error = icons.diagnostics.Error,
     },
   },
-  update_focused_file = {
-    enable = true,
-    update_cwd = true,
-    ignore_list = {},
-  },
-  -- system_open = {
-  --   cmd = nil,
-  --   args = {},
-  -- },
-  -- filters = {
-  --   dotfiles = false,
-  --   custom = {},
-  -- },
   git = {
     enable = true,
     ignore = true,

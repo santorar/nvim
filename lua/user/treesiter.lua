@@ -16,7 +16,7 @@ configs.setup {
   autopairs = {
     enable = true,
   },
-  indent = {enable = true,disable = {""}},
+  indent = {enable = true,disable = {"python","css"}},
   autotag = {enable = true, disable = {"markdown","xml"}},
   rainbow = {
     enable = true,
@@ -25,9 +25,8 @@ configs.setup {
     colors = {
       "#68a0b0",
       "#946EaD",
-      "#c7aA6D",
+      "#c71A6D",
     },
     disable = {"html"},
   },
-  playground = {enable = true,},
 }

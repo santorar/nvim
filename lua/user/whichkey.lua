@@ -23,16 +23,8 @@ local setup = {
       g = true, -- bindings for prefixed with g
     },
   },
-  -- add operators that will trigger motion and text object completion
-  -- to enable all native operators, set the preset / operators plugin above
-  -- operators = { gc = "Comments" },
   key_labels = {
-    -- override the label used to display some keys. It doesn't effect WK in any other way.
-    -- For example:
-    -- ["<space>"] = "SPC",
     ["<leader>"] = "SPC",
-    -- ["<cr>"] = "RET",
-    -- ["<tab>"] = "TAB",
   },
   icons = {
     breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
@@ -59,12 +51,7 @@ local setup = {
   ignore_missing = true, -- enable this to hide mappings for which you didn't specify a label
   hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
   show_help = false, -- show help message on the command line when the popup is visible
-  -- triggers = "auto", -- automatically setup triggers
-  -- triggers = {"<leader>"} -- or specify a list manually
   triggers_blacklist = {
-    -- list of mode / prefixes that should never be hooked by WhichKey
-    -- this is mostly relevant for key maps that start with a native binding
-    -- most people should not need to change this
     i = { "j", "k" },
     v = { "j", "k" },
   },
@@ -91,26 +78,15 @@ local m_mappings = {
   a = { "<cmd>silent BookmarkAnnotate<cr>", "Annotate" },
   c = { "<cmd>silent BookmarkClear<cr>", "Clear" },
   b = { "<cmd>silent BookmarkToggle<cr>", "Toggle" },
-  m = { '<cmd>lua require("harpoon.mark").add_file()<cr>', "Harpoon" },
-  ["."] = { '<cmd>lua require("harpoon.ui").nav_next()<cr>', "Harpoon Next" },
-  [","] = { '<cmd>lua require("harpoon.ui").nav_prev()<cr>', "Harpoon Prev" },
-  l = { "<cmd>lua require('user.bfs').open()<cr>", "Buffers" },
   j = { "<cmd>silent BookmarkNext<cr>", "Next" },
-  s = { "<cmd>Telescope harpoon marks<cr>", "Search Files" },
   k = { "<cmd>silent BookmarkPrev<cr>", "Prev" },
   S = { "<cmd>silent BookmarkShowAll<cr>", "Prev" },
-  -- s = {
-  --   "<cmd>lua require('telescope').extensions.vim_bookmarks.all({ hide_filename=false, prompt_title=\"bookmarks\", shorten_path=false })<cr>",
-  --   "Show",
-  -- },
   x = { "<cmd>BookmarkClearAll<cr>", "Clear All" },
-  [";"] = { '<cmd>lua require("harpoon.ui").toggle_quick_menu()<cr>', "Harpoon UI" },
 }
 local mappings = {
   q = {
     name = "Quit",
-    q = {":bd!<CR>","Close the current buffer"},
-    w = {":bw!<CR>","Close and save the current buffer"},
+    q = {":Bdelete!<CR>","Close the current buffer"},
     a = {":q!<CR>","Closes neovim"},
   },
   s = {
@@ -142,20 +118,37 @@ local mappings = {
     name = "Edit",
     n = {":e /home/santorar/.config/nvim/init.lua<CR>","Edit nvim config"},
   },
-  g = {
+  l = {
     name = "LSP",
     i = {":LspInfo<CR>","Connected Language Servers"},
-    A = {":lua vim.lsp.buf.add_workspace_folder()<CR>","Add workspace folder"},
-    R = {":lua vim.lsp.buf.remove_workspace_folder()<CR>","Remove workspace folder"},
-    l = {":lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>","List workspace folders"},
-    D = {":lua vim.lsp.buf.type_definition()<CR>","Type definition"},
-    r = {":lua vim.lsp.buf.rename()<CR>","Rename"},
+    I = {":LspInstallInfo<CR>","Installed Language Servers"},
+    f = {":lua vim.lsp.buf.formatting()<cr>","Format Code"},
     a = {":lua vim.lsp.buf.code_action()<CR>","Code actions"},
-    e = {":lua vim.lsp.diagnostic.show_line_diagnostics()<CR>","Show line diagnostics"},
-    q = {":lua vim.lsp.diagnostic.set_loclist()<CR>","Show loclist"},
+    j = {"<cmd>lua vim.diagnostic.goto_next({buffer=0})<cr>","Go to next diagnostic"},
+    k = {"<cmd>lua vim.diagnostic.goto_prev({buffer=0})<cr>","Go to prev diagnostic"},
+    r = {":lua vim.lsp.buf.rename()<CR>","Rename"},
+    s = {":lua vim.lsp.buf.signature_help()<CR>","Signature help"},
+    q = {":lua vim.diagnostic.setloclist()<CR>","Show loclist"},
+    D = {":lua vim.lsp.buf.type_definition()<CR>","Type definition"},
   },
-  h = {":BufferLineCyclePrev<CR>","Next buffer"},
-  l = {":BufferLineCycleNext<CR>","Prev buffer"},
+  d = {
+    name = "DAP",
+    b = {"<cmd>lua require'dap'.toggle_breakpoint()<cr>","Toggle a breakpoint"},
+    c = {"<cmd>lua require'dap'.continue()<cr>","Continue dap"},
+    i = {"<cmd>lua require'dap'.step_into()<cr>","Step into"},
+    o = {"<cmd>lua require'dap'.step_over()<cr>","Step over"},
+    O = {"<cmd>lua require'dap'.step_out()<cr>","Step out"},
+    r = {"<cmd>lua require'dap'.repl.toggle()<cr>","Replay toggle"},
+    l = {"<cmd>lua require'dap'.run_last()<cr>","Run last part"},
+    u = {"<cmd>lua require'dapui'.toggle()<cr>","Toggle ui"},
+    t = {"<cmd>lua require'dap'.terminate()<cr>","Terminate debuging"},
+  },
+  g = {
+    name = "GIT",
+    g = {"<cmd>lua _LAZYGIT_TOGGLE()<CR>","Opens luagit"},
+  },
+  n = {":NvimTreeToggle<CR>","Prev buffer"},
+  ["/"] = { '<ESC><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<CR>', "Comment" },
 }
 local vopts = {
   mode = "v",
@@ -167,7 +160,6 @@ local vopts = {
 }
 local vmappings ={
   ["/"] = { '<ESC><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<CR>', "Comment" },
-  s = { "<esc><cmd>'<,'>SnipRun<cr>", "Run range" },
 }
 which_key.setup(setup)
 which_key.register(mappings,opts)

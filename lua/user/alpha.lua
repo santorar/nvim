@@ -42,30 +42,12 @@ dashboard.section.buttons.val = {
 }
 
 local function footer()
-  -- NOTE: requires the fortune-mod package to work
-  -- local handle = io.popen("fortune")
-  -- local fortune = handle:read("*a")
-  -- handle:close()
-  -- return fortune
   return "Enjoy your coding :D "
 end
 
-local config = {
-    layout = {
-        { type = "padding", val = 1 },
-        dashboard.section.header,
-        { type = "padding", val = 2 },
-        dashboard.section.buttons,
-        dashboard.section.footer,
-    },
-    opts = {
-        margin = 2,
-    },
-}
-
-
-dashboard.config = config
 dashboard.section.footer.val = footer()
+
+dashboard.section.footer.opts.hl = "Type"
 dashboard.section.header.opts.hl = "Include"
 dashboard.section.buttons.opts.hl = "Keyword"
 

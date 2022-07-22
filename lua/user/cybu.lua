@@ -28,5 +28,5 @@ cybu.setup {
     },
   },
 }
-vim.keymap.set("n", "<c-k>", "<Plug>(CybuPrev)")
-vim.keymap.set("n", "<c-j>", "<Plug>(CybuNext)")
+vim.keymap.set("n", "<m-k>", "<Plug>(CybuPrev)")
+vim.keymap.set("n", "<m-j>", "<Plug>(CybuNext)")
